@@ -15,7 +15,7 @@ public:
         }
         return -1;
     }
-    int findPositionUpper(vector<int> nums,int target){
+    int findPositionUpper(vector<int> &nums,int &target){
         int low=0,high=nums.size()-1;
         while(low<=high){
             int mid=(low+high)/2;
