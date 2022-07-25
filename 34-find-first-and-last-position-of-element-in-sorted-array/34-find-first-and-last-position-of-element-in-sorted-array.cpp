@@ -32,11 +32,11 @@ public:
     }
     vector<int> searchRange(vector<int>& nums, int target) {
         vector<int> res;
-        if(nums.size()==0) {
-             res.push_back(-1);
-            res.push_back(-1);
-            return res;
-        }
+        // if(nums.size()==0) {
+        //      res.push_back(-1);
+        //     res.push_back(-1);
+        //     return res;
+        // }
         int lowerBound=findPositionLower(nums,target);
         int upperBound=findPositionUpper(nums,target);
         res.push_back(lowerBound);
