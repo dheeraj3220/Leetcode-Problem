@@ -4,12 +4,13 @@ class LRUCache {
 public:
     class Listnode{
     public:
-    pair<int,int> val;
+    int key;
+    int val;
     Listnode*next;
     Listnode*prev;
-    Listnode(pair<int,int> value){
-        val.first= value.first;
-        val.second=value.second;
+    Listnode(int key,int val){
+        this->key= key;
+        this->val=val;
     }
 };
     int cap;
@@ -38,12 +39,12 @@ public:
     int get(int key) {
         if(mapp.count(key)==0) return -1;
         Listnode*temp=mapp[key];
-        pair p=temp->val;
+        int p=temp->val;
          mapp.erase(key);
         deleteNode(temp);
         addNode(temp);
         mapp[key]=head->next; 
-        return p.second;
+        return p;
     }
     
     void put(int key, int value) {
@@ -55,7 +56,7 @@ public:
         }
         if( mapp.size()==cap){
             Listnode*temp=tail->prev;
-            mapp.erase(temp->val.first);
+            mapp.erase(temp->key);
             deleteNode(temp);            
         }
         
