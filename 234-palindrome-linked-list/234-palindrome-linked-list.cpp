@@ -31,13 +31,14 @@
 class Solution {
 public:
     ListNode* findMid(ListNode* head){
-        ListNode* slow=head,*fast=head;
-        while(fast!=NULL && fast->next!=NULL){
+        // ListNode* slow=head,*fast=head;
+        ListNode*slow=head;
+        ListNode*fast=head->next;
+        while(fast!=NULL && fast->next!=NULL) {
             slow=slow->next;
-            fast=fast->next;
-            if(fast) fast=fast->next;
+            fast=fast->next->next;
         }
-        return slow;
+        return slow->next;
     }
     ListNode* reverseList(ListNode* head){
         ListNode* prev=NULL,*curr=head,*temp=NULL;
