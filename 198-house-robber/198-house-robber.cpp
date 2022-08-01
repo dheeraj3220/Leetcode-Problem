@@ -11,14 +11,17 @@ public:
     //     return dp[index]=max(notRobbed,robbed);
     // }
     int rob(vector<int>& nums) {
-        vector<int> dp(nums.size()+1,-1);
-        dp[0]=nums[0];
+        // vector<int> dp(nums.size()+1,-1);
+        int prev=nums[0];
+        int prev2=0;
         for(int i=1;i<nums.size();i++){
-            int notRobbed=dp[i-1];
+            int notRobbed=prev;
             int robbed=nums[i];
-            if(i>1)robbed+=dp[i-2];
-            dp[i]=max(notRobbed,robbed);
+            if(i>1)robbed+=prev2;
+            int curi=max(notRobbed,robbed);
+            prev2=prev;
+            prev=curi;
         }
-        return dp[nums.size()-1];
+        return prev;
     }
 };
