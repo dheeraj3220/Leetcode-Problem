@@ -1,12 +1,12 @@
 class Solution {
 public:
     int helper(vector<int> &nums,vector<int>& dp,int index){
-        if(nums[index]==0 && index!=nums.size()-1) return 0;
-        if(index==nums.size()-1)
+        if(index>=nums.size()-1)
             return 1;
+        if(nums[index]==0 && index!=nums.size()-1) return 0;
         if(dp[index]!=-1) return dp[index];
         dp[index]=0;
-        for(int i=1;i<=nums[index];i++){
+        for(int i=nums[index];i>=1;i--){
             dp[index]=dp[index] || helper(nums,dp,index+i);
             if(dp[index]) return dp[index];
         }
