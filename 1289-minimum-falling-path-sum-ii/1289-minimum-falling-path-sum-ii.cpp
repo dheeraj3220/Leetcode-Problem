@@ -1,12 +1,12 @@
 class Solution {
 public:
-     int helper(vector<vector<int>> & matrix,int row,int col,vector<vector<int>>&dp ){
-        if(col<0 || col>=matrix.size()) return 1e9;
-        if(row==matrix.size()) return 0;
+     int helper(vector<vector<int>> & grid,int row,int col,vector<vector<int>>&dp ){
+        if(col<0 || col>=grid.size()) return 1e9;
+        if(row==grid.size()) return 0;
         if(dp[row][col]!=-1) return dp[row][col];
         dp[row][col]=1e9;
-        for(int i=0;i<matrix.size();i++){
-            if(i!=col)dp[row][col]=min(dp[row][col],matrix[row][col]+helper(matrix,row+1,i,dp));
+        for(int i=0;i<grid.size();i++){
+            if(i!=col)dp[row][col]=min(dp[row][col],grid[row][col]+helper(grid,row+1,i,dp));
         }
         return dp[row][col];
         
