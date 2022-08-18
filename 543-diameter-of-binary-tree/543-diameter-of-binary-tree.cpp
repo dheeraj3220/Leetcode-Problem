@@ -11,32 +11,18 @@
  */
 class Solution {
 public:
-    /*
-        p.first= height;
-        p.second=diameter
+    
+    int calDia(TreeNode*root,int &dia){
+        if(root==NULL) return 0;
+        int leftHeight=calDia(root->left,dia);
+        int rightHeight=calDia(root->right,dia);
+        dia=max(dia,leftHeight+rightHeight);
+        return 1+max(leftHeight,rightHeight);
         
-    */
-    
-    // int height(TreeNode*root){
-    //     if(root==NULL) return 0;
-    //     return 1+max(height(root->left),height(root->right));
-    // }
-    
-    pair<int,int> helper(TreeNode*root){
-        pair<int,int> p;
-        if(root==NULL) {
-            p.first=0;
-            p.second=0;
-            return p;
-        }
-        pair<int,int> leftans=helper(root->left);
-        pair<int,int> rightans=helper(root->right);
-        p.first=1+max(leftans.first,rightans.first);
-        p.second=max(leftans.first+rightans.first,max(leftans.second,rightans.second));
-        return p;
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        pair<int,int> p=helper(root);
-        return p.second;
+        int dia=0;
+        calDia(root,dia); 
+        return dia;
     }
 };
