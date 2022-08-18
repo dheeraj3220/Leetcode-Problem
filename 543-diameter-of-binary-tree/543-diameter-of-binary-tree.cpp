@@ -17,15 +17,26 @@ public:
         
     */
     
-    int height(TreeNode*root){
-        if(root==NULL) return 0;
-        return 1+max(height(root->left),height(root->right));
+    // int height(TreeNode*root){
+    //     if(root==NULL) return 0;
+    //     return 1+max(height(root->left),height(root->right));
+    // }
+    
+    pair<int,int> helper(TreeNode*root){
+        pair<int,int> p;
+        if(root==NULL) {
+            p.first=0;
+            p.second=0;
+            return p;
+        }
+        pair<int,int> leftans=helper(root->left);
+        pair<int,int> rightans=helper(root->right);
+        p.first=1+max(leftans.first,rightans.first);
+        p.second=max(leftans.first+rightans.first,max(leftans.second,rightans.second));
+        return p;
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        if(root==NULL) return 0;
-        int h1=diameterOfBinaryTree(root->left);
-        int h2=diameterOfBinaryTree(root->right);
-        int h3=height(root->left)+height(root->right);
-        return max(h1,max(h2,h3));
+        pair<int,int> p=helper(root);
+        return p.second;
     }
 };
