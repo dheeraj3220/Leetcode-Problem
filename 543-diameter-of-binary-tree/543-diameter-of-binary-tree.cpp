@@ -11,17 +11,21 @@
  */
 class Solution {
 public:
-    int helper(TreeNode*root,int &dia){
+    /*
+        p.first= height;
+        p.second=diameter
+        
+    */
+    
+    int height(TreeNode*root){
         if(root==NULL) return 0;
-        int left=helper(root->left,dia);
-        int right=helper(root->right,dia);
-        dia=max(dia,left+right);
-        return 1+max(left,right);
+        return 1+max(height(root->left),height(root->right));
     }
     int diameterOfBinaryTree(TreeNode* root) {
         if(root==NULL) return 0;
-        int dia=0;
-        helper(root,dia);
-        return dia;
+        int h1=diameterOfBinaryTree(root->left);
+        int h2=diameterOfBinaryTree(root->right);
+        int h3=height(root->left)+height(root->right);
+        return max(h1,max(h2,h3));
     }
 };
