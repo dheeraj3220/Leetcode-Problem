@@ -1,11 +1,11 @@
 class Solution {
 public:
     void markIsland(vector<vector<char>>& grid, int i, int j){
-        if(i>=grid.size() || j>=grid[0].size() || i<0 || j<0)
+        if(i>=grid.size() || j>=grid[0].size() || i<0 || j<0 || grid[i][j]=='0')
             return;
         
-        if(grid[i][j]=='0')
-            return;
+        // if(grid[i][j]=='0')
+        //     return;
         
         grid[i][j]='0';
         
