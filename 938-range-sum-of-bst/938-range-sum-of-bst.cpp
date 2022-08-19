@@ -11,17 +11,20 @@
  */
 class Solution {
 public:
-     void helper(TreeNode* root, int low, int high,int &sum){
-         if(root==NULL) return ;
-         if(root->val>=low && root->val<=high) sum+=root->val;
-         if(root->val>low) helper(root->left,low,high,sum);
-         if(root->val<high) helper(root->right,low,high,sum);
+//      void helper(TreeNode* root, int low, int high,int &sum){
+//          if(root==NULL) return ;
+//          if(root->val>=low && root->val<=high) sum+=root->val;
+//          if(root->val>low) helper(root->left,low,high,sum);
+//          if(root->val<high) helper(root->right,low,high,sum);
          
          
-     }
+//      }
+    int sum=0;
     int rangeSumBST(TreeNode* root, int low, int high) {
-       int sum=0;
-        helper(root,low,high,sum); 
+        if(root==NULL) return 0;
+        if(root->val>=low && root->val<=high) sum+=root->val;
+        if(root->val>low) rangeSumBST(root->left,low,high);
+        if(root->val<high) rangeSumBST(root->right,low,high);
         return sum;
     }
 };
