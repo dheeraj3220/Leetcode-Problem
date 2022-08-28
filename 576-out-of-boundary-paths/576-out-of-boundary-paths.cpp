@@ -1,7 +1,7 @@
 class Solution {
 public:
     int mod=1000000007;
-    int dp[110][110][110];
+    int dp[51][51][51];
     int helper(int m, int n, int maxMove, int i, int j){
         if(i<0 || i>=m || j<0 || j>=n) {
             return 1;
