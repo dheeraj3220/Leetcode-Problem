@@ -11,21 +11,11 @@
  */
 class Solution {
 public:
-    bool helper(TreeNode*root){
-        if(root==NULL){
-            return false;
-        }
-        bool leftans=helper(root->left);
-        bool rightans=helper(root->right);
-        if(leftans==false) root->left=NULL;
-        if(rightans==false) root->right=NULL;
-        return root->val==1 || leftans || rightans;
-    }
     TreeNode* pruneTree(TreeNode* root) {
-        if(root==NULL) return NULL;
-        bool ans=helper(root);
-        if(ans==false) return NULL;
-        else
-            return root;
+        if (!root) return NULL;
+        root->left = pruneTree(root->left);
+        root->right = pruneTree(root->right);
+        if (!root->left && !root->right && root->val == 0) return NULL;
+        return root;
     }
 };
