@@ -1,16 +1,16 @@
 class Solution {
 public:
     int mostFrequentEven(vector<int>& nums) {
-        int arr[100001]={0};
+        map<int,int> mapp;
         for(auto iter:nums){
-            if(iter%2==0) arr[iter]++;
+            if(iter%2==0) mapp[iter]++;
         }
         int res=-1;
         int maxi=0;
-        for(int i=0;i<100001;i++){
-            if(maxi<arr[i]) {
-                res=i;
-                maxi=arr[i];
+        for(auto i=mapp.begin();i!=mapp.end();i++){
+            if(i->second>maxi){
+                res=i->first;
+                maxi=i->second;
             }
         }
         return res;
