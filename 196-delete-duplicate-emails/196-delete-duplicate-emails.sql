@@ -6,5 +6,5 @@ WHERE Id NOT IN (
     SELECT Min(Id)
     FROM Person
     GROUP BY Email
-  ) Tmp
+  ) p
 )
