@@ -1,32 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
+    ListNode* add(ListNode*l1,ListNode*l2,int carry){
+        if(l1==NULL && l2==NULL && carry==0) return NULL;
+        int sum=carry;
+        sum+=l1==NULL?0:l1->val;
+        sum+=l2==NULL?0:l2->val;
+        ListNode*newNode=new ListNode(sum%10);
+        carry=sum/10;
+        if(l1) l1=l1->next;
+        if(l2) l2=l2->next;
+        newNode->next=add(l1,l2,carry);
+        return newNode;
+    }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int carry = 0;
-        ListNode* p1 = l1;
-        ListNode* p2 = l2;
-        ListNode* result = new ListNode(-1);
-        ListNode* dummy = result;
-        while(p1 || p2 || carry){
-            if(!p1 && carry == 0){
-                result->next = p2;
-                break;
-            }
-            if(!p2 && carry == 0){
-                result->next = p1;
-                break;
-            }
-            int digit1 = p1 ? p1->val : 0;
-            int digit2 = p2 ? p2->val : 0;
-            int sum = digit1 + digit2 + carry;
-            carry = sum / 10;
-            sum %= 10;
-            result->next = new ListNode(sum);
-            if(p1)  p1 = p1->next;
-            if(p2)  p2 = p2->next;
-            result = result->next;
-        }
-        result = dummy->next;
-        delete dummy;
-        return result;
+        return add(l1,l2,0);
     }
 };
