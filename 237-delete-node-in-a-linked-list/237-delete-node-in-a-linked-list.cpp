@@ -9,7 +9,7 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        if(node->next==NULL) node=NULL;
+        // if(node->next==NULL) node=NULL;
         swap(node->val,node->next->val);
         node->next=node->next->next;
     }
