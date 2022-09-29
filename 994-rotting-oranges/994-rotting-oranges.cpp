@@ -10,6 +10,7 @@ public:
                 if(grid[i][j]==2){
                     que.push({{i,j},0});
                     visited[i][j]=2;
+                    inOranges--;
                 }
                 
             }
@@ -24,23 +25,22 @@ public:
             if(x+1<grid.size() && visited[x+1][y]!=2 && grid[x+1][y]==1){
                 que.push({{x+1,y},time+1});
                 visited[x+1][y]=2;
+                inOranges--;
             }
             if(x-1>=0 && visited[x-1][y]!=2 && grid[x-1][y]==1){
                 que.push({{x-1,y},time+1});
                 visited[x-1][y]=2;
+                inOranges--;
             }
             if(y+1<grid[0].size() && visited[x][y+1]!=2 && grid[x][y+1]==1){
                 que.push({{x,y+1},time+1});
                 visited[x][y+1]=2;
+                inOranges--;
             }
             if(y-1>=0 && visited[x][y-1]!=2 && grid[x][y-1]==1){
                 que.push({{x,y-1},time+1});
                 visited[x][y-1]=2;
-            }
-        }
-        for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid[0].size();j++){
-                if(visited[i][j]==2) inOranges--;
+                inOranges--;
             }
         }
         if(inOranges==0) return time;
