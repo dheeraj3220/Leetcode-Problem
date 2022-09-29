@@ -1,53 +1,50 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-        int totalOranges=0;
-        int rottenOranges=0;
-        int minutes=0;
-        queue<pair<int,int>> que;
+        int inOranges=0;
+        queue<pair<pair<int,int>,int>> que;
+        vector<vector<int>> visited(grid.size(),vector<int>(grid[0].size(),0));
         for(int i=0;i<grid.size();i++){
             for(int j=0;j<grid[0].size();j++){
-                if(grid[i][j]==2) {
-                    rottenOranges++;
-                    que.push({i,j});   
+                if(grid[i][j]==1 || grid[i][j]==2) inOranges++;
+                if(grid[i][j]==2){
+                    que.push({{i,j},0});
+                    visited[i][j]=2;
                 }
-                if(grid[i][j]!=0) totalOranges++;
-            }
-        }
-        if(totalOranges==0 || totalOranges==rottenOranges) return 0;
-        rottenOranges=0;
-        
-        while(!que.empty()){
-            int queSize=que.size();
-            for(int i=0;i<queSize;i++){
-                pair curOrange=que.front();
-                que.pop();
-                int x=curOrange.first;
-                int y=curOrange.second;
-                if(x+1<grid.size() && grid[x+1][y]==1){
-                  que.push({x+1,y});
-                  grid[x+1][y]=2;  
-                } 
-                if(x-1>=0 && grid[x-1][y]==1) {
-                 que.push({x-1,y});
-                 grid[x-1][y]=2;  
-                }
-                if(y+1<grid[0].size() && grid[x][y+1]==1) { 
-                   que.push({x,y+1});
-                   grid[x][y+1]=2;  
-                }
-                if(y-1>=0 && grid[x][y-1]==1) 
-                {
-                    que.push({x,y-1});
-                    grid[x][y-1]=2;  
-                }
-                rottenOranges++;
                 
             }
-            minutes++;
         }
-        if(rottenOranges==totalOranges) return minutes-1;
-        else
-            return -1;
+        
+        int time =0;
+        while(!que.empty()){
+            int x=que.front().first.first;
+            int y=que.front().first.second;
+            time =que.front().second;
+            que.pop();
+            if(x+1<grid.size() && visited[x+1][y]!=2 && grid[x+1][y]==1){
+                que.push({{x+1,y},time+1});
+                visited[x+1][y]=2;
+            }
+            if(x-1>=0 && visited[x-1][y]!=2 && grid[x-1][y]==1){
+                que.push({{x-1,y},time+1});
+                visited[x-1][y]=2;
+            }
+            if(y+1<grid[0].size() && visited[x][y+1]!=2 && grid[x][y+1]==1){
+                que.push({{x,y+1},time+1});
+                visited[x][y+1]=2;
+            }
+            if(y-1>=0 && visited[x][y-1]!=2 && grid[x][y-1]==1){
+                que.push({{x,y-1},time+1});
+                visited[x][y-1]=2;
+            }
+        }
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                if(visited[i][j]==2) inOranges--;
+            }
+        }
+        if(inOranges==0) return time;
+        else return -1;
+        
     }
 };
