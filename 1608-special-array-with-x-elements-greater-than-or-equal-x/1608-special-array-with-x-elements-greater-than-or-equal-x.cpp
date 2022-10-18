@@ -1,7 +1,7 @@
 class Solution {
 public:
     int specialArray(vector<int>& nums) {
-        vector<int> arr(1001,0);
+       int arr[1001]={0};
         for(auto num :nums) arr[num]++;
         int x=nums.size();
         for(int i=0;i<=nums.size();i++){
