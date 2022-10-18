@@ -1,5 +1,8 @@
 class Solution {
 public:
+    
+    // Ha bhai bkwaas question hai 
+    
     string countAndSay(int n) {
     if (n == 0) return "";
     string res = "1";
