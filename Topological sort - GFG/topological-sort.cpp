@@ -17,7 +17,7 @@ class Solution
 // 	}
 
 ////////////KAhN's Algorithm
-    void bfs(vector<int> adj[],vector<int>&vis,vector<int>&res,int start,vector<int>& inDegree){
+    void bfs(vector<int> adj[],vector<int>&vis,vector<int>&res,vector<int>& inDegree){
         queue<int> que;
         for(int i=0;i<vis.size();i++){
             if(!vis[i] && inDegree[i]==0){ 
@@ -52,7 +52,7 @@ class Solution
 	        }
 	    }
 	           // dfs(adj,vis,res,i);
-	           bfs(adj,vis,res,0,inDegree);
+	           bfs(adj,vis,res,inDegree);
 	    return res;
 	}
 };
