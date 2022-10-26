@@ -7,25 +7,56 @@ class Solution
 {
 	public:
 	//Function to return list containing vertices in Topological order.
-	void dfs(vector<int> adj[],vector<int>&vis,vector<int>&res,int start){
-	    vis[start]=1;
-	    for(auto node : adj[start]){
-	        if(!vis[node]) dfs(adj,vis,res,node);
-	    }
-	    res.push_back(start);
-	    return ;
-	}
+// 	void dfs(vector<int> adj[],vector<int>&vis,vector<int>&res,int start){
+// 	    vis[start]=1;
+// 	    for(auto node : adj[start]){
+// 	        if(!vis[node]) dfs(adj,vis,res,node);
+// 	    }
+// 	    res.push_back(start);
+// 	    return ;
+// 	}
+
+////////////KAhN's Algorithm
+    void bfs(vector<int> adj[],vector<int>&vis,vector<int>&res,int start,vector<int>& inDegree){
+        queue<int> que;
+        for(int i=0;i<vis.size();i++){
+            if(!vis[i] && inDegree[i]==0){ 
+                que.push(i);
+                vis[i]=1;
+                
+            }
+        }
+        while(!que.empty()){
+            int curNode=que.front();
+            que.pop();
+            res.push_back(curNode);
+            for(auto node : adj[curNode]){
+                inDegree[node]--;
+                if(inDegree[node]==0){
+                    que.push(node);
+                    vis[node]=1;
+                }
+            }
+        }
+
+    }
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
 	    vector<int> vis(V,0);
 	    vector<int> res;
+	    vector<int> inDegree(V,0);
 	    for(int i=0;i<V;i++){
-	        if(!vis[i]){
-	            dfs(adj,vis,res,i);
+	        for(auto node : adj[i]){
+	            inDegree[node]++;
 	        }
 	    }
-	    reverse(res.begin(),res.end());
+	    for(int i=0;i<V;i++){
+	        if(!vis[i]){
+	           // dfs(adj,vis,res,i);
+	           bfs(adj,vis,res,i,inDegree);
+	        }
+	    }
 	    return res;
 	}
 };
