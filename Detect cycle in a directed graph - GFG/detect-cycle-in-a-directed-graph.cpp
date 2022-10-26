@@ -5,17 +5,17 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   private : 
-    bool dfs(vector<int> adj[],vector<int>&vis,vector<int>&pathVis,int start){
-        vis[start]=1;
-        pathVis[start]=1;
+    bool dfs(vector<int> adj[],vector<int>&vis,int start){
+        vis[start]=2;
+        // pathVis[start]=1;
         for(auto node : adj[start]){
             if(!vis[node])
             {
-                if(dfs(adj,vis,pathVis,node)) return true;
+                if(dfs(adj,vis,node)) return true;
             }
-            else if(vis[node] && pathVis[node]) return true;
+            else if(vis[node]==2) return true;
         }
-        pathVis[start]=0;
+        vis[start]=1;
         return false;
     }
   public:
@@ -23,10 +23,9 @@ class Solution {
     bool isCyclic(int V, vector<int> adj[]) {
         // code here
         vector<int> vis(V,0);
-        vector<int> pathVis(V,0);
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(dfs(adj,vis,pathVis,i)) return true;
+                if(dfs(adj,vis,i)) return true;
             }
         }
         return false;
