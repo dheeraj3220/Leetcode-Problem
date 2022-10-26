@@ -51,12 +51,8 @@ class Solution
 	            inDegree[node]++;
 	        }
 	    }
-	    for(int i=0;i<V;i++){
-	        if(!vis[i]){
 	           // dfs(adj,vis,res,i);
-	           bfs(adj,vis,res,i,inDegree);
-	        }
-	    }
+	           bfs(adj,vis,res,0,inDegree);
 	    return res;
 	}
 };
