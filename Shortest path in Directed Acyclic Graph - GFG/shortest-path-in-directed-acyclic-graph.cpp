@@ -25,23 +25,19 @@ class Solution {
         }
         stack<int> stk;
         vector<int> vis(N,0);
-        // for(int i=0;i<N;i++)
         dfs(adj,stk,0,vis);
-        // cout<<stk.size()<<"stk size ";
-        vector<int> distance(N,1e9);
+        vector<int> distance(N,-1);
         distance[0]=0;
         while(!stk.empty()){
             int cur=stk.top();
-            // cout<<cur<<endl;
             stk.pop();
             for(auto dist : adj[cur]){
-                // cout<<dist.first <<" fr "<<dist.second<<endl; 
-                if(distance[dist.first]>(distance[cur]+dist.second)){
+                if(distance[dist.first]==-1 || distance[dist.first]>(distance[cur]+dist.second)){
                     distance[dist.first]=distance[cur]+dist.second;
                 }
             }
         }
-        for(int i=0;i<N;i++) if(distance[i]==1e9) distance[i]=-1;
+        // for(int i=0;i<N;i++) if(distance[i]==1e9) distance[i]=-1;
         return distance;
     }
 };
