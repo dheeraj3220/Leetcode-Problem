@@ -25,8 +25,8 @@ class Solution {
         }
         stack<int> stk;
         vector<int> vis(N,0);
-        for(int i=0;i<N;i++)
-        if(!vis[i])dfs(adj,stk,i,vis);
+        // for(int i=0;i<N;i++)
+        dfs(adj,stk,0,vis);
         // cout<<stk.size()<<"stk size ";
         vector<int> distance(N,1e9);
         distance[0]=0;
