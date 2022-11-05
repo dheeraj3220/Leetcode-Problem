@@ -24,11 +24,11 @@ class Solution {
             int curNode=que.front().first;
             int dist=que.front().second;
             que.pop();
+            distance[curNode]=dist;
             for(auto node: adj[curNode]){
                 if(!vis[node]){
                     que.push({node,dist+1});
                     vis[node]=1;
-                    distance[node]=dist+1;
                 }
             }
             
