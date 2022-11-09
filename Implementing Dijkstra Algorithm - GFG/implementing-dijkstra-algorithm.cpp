@@ -11,18 +11,37 @@ class Solution
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         // Code here
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>  pq;
-        vector<int > distance(V,1e9);
+        // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>  pq;
+        // vector<int > distance(V,1e9);
+        // distance[S]=0;
+        // pq.push({0,S});
+        // while(!pq.empty()){
+        //     int curNode=pq.top().second;
+        //     int curDist=pq.top().first;
+        //     pq.pop();
+        //     for(auto node : adj[curNode]){
+        //         if(curDist+node[1] < distance[node[0]]){
+        //             distance[node[0]]=curDist+node[1];
+        //             pq.push({distance[node[0]],node[0]});
+        //         }
+        //     }
+        // }
+        // return distance;
+        set<pair<int,int >> mySet;
+        vector<int> distance(V,1e9);
         distance[S]=0;
-        pq.push({0,S});
-        while(!pq.empty()){
-            int curNode=pq.top().second;
-            int curDist=pq.top().first;
-            pq.pop();
-            for(auto node : adj[curNode]){
-                if(curDist+node[1] < distance[node[0]]){
-                    distance[node[0]]=curDist+node[1];
-                    pq.push({distance[node[0]],node[0]});
+        mySet.insert({0,S});
+        while(!mySet.empty()){
+            auto it=*(mySet.begin());
+            int edgeWeight=it.first;
+            int edge=it.second;
+            mySet.erase(it);
+            for(auto adjEdge : adj[edge] ){
+                if(edgeWeight+adjEdge[1] < distance[adjEdge[0]] ){
+                    if(mySet.count({distance[adjEdge[0]],adjEdge[0]})) 
+                        mySet.erase({distance[adjEdge[0]],adjEdge[0]});
+                    distance[adjEdge[0]]=edgeWeight+adjEdge[1];
+                    mySet.insert({distance[adjEdge[0]],adjEdge[0]});
                 }
             }
         }
