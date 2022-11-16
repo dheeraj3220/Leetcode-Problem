@@ -20,7 +20,7 @@ class Solution {
         int relax=0;
         while(count!=0){
             count=0;
-            if(relax>=n) return {-1};
+            if(relax>n-1) return {-1};
             else relax++;
             for(auto it : edges){
                 if(distance[it[0]]+it[2]<distance[it[1]]){
