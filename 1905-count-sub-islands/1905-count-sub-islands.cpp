@@ -50,7 +50,6 @@ public:
         
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                queue<pair<int,int>> que;
                 if(grid2[i][j]==1){
                     queue<pair<int,int>> que;
                     bool island=true;
