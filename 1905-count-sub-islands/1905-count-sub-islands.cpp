@@ -57,9 +57,8 @@ public:
                     if(grid1[i][j]!=1) island=false;
                     grid2[i][j]=0;
                     while(!que.empty()){
-                        auto it=que.front();
-                        int x=it.first;
-                        int y=it.second;
+                        int x=que.front().first;
+                        int y=que.front().second;
                         int dr[]={-1,0,1,0};
                         int dc[]={0,-1,0,1};
                         que.pop();
