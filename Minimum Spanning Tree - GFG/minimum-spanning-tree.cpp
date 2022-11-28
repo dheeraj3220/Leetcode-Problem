@@ -12,21 +12,20 @@ class Solution
     {
         // code here
         
-        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>> pq;
-        pq.push({0,{0,-1}});
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        pq.push({0,0});
         int sum=0;
         vector<int> vis(V,0);
         while(!pq.empty()){
             auto it=pq.top();
             int wt=it.first;
-            int curNode=it.second.first;
-            int parent=it.second.second;
+            int curNode=it.second;
             pq.pop();
             if(!vis[curNode]){
               sum+=wt;
               vis[curNode]=1;
               for(auto node: adj[curNode]){
-                  if(!vis[node[0]]) pq.push({node[1],{node[0],curNode}});
+                  if(!vis[node[0]]) pq.push({node[1],node[0]});
               }
             } 
         }
