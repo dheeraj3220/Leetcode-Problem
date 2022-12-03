@@ -9,19 +9,9 @@ public:
         }
         string res;
         while(!pq.empty()){
-            // map<long,char> mappi;
-            auto it=pq.top();
-            // while(pq.size() && t==pq.top().first){
-            //     char cur=pq.top().second;
-                // pq.pop();
-            //     mappi[cur]=t;
-            // }
-            // while(mappi.size()){
-                // auto it=mappi.begin();
-                while(it.first--) res.push_back(it.second);
-            pq.pop();
-                // mappi.erase(mappi.begin());
-            // }
+                auto it=pq.top();
+                while(it.first--) res+=it.second;
+                pq.pop();
         }
         return res;
     }
