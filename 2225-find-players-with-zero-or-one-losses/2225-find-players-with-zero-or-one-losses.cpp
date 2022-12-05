@@ -1,8 +1,8 @@
 class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
-        map<int,int> loss;
-        set<int> total;
+        unordered_map<int,int> loss;
+        unordered_set<int> total;
         for(auto match : matches){
             loss[match[1]]++;
             total.insert(match[0]);
@@ -18,6 +18,8 @@ public:
             }
         }
         vector<vector<int>> res;
+        sort(zeroLoss.begin(),zeroLoss.end());
+        sort(oneLoss.begin(),oneLoss.end());
         res.push_back(zeroLoss);
         res.push_back(oneLoss);
         return res;
