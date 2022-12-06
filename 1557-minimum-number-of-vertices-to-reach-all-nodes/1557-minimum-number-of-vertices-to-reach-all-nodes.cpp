@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
         vector<int> inOrder(n,0);
-        for(auto edge : edges){
+        for(auto &edge : edges){
             inOrder[edge[1]]=1;
         }
         vector<int > res;
