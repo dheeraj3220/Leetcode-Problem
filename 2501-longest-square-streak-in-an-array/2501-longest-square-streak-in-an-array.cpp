@@ -1,24 +1,20 @@
 class Solution {
 public:
     int longestSquareStreak(vector<int>& nums) {
-        unordered_map<long,long> mapp;
+        map<long,long> mapp;
         for(auto num : nums) {
             mapp[num]++;
         }
-        int maxCount=0;
-        for(int i=2;i<320;i++){
-            int count=0;
-            for(int j=i;j<=500000;){
-                if(j>319) {
-                    if(mapp.count(j)==1) count++;
-                    break;
-                }
-                if(mapp.count(j)==1){
-                    count++;
-                    j=j*j;
-                }
-                else break;
+        long long maxCount=0;
+        for(auto i=mapp.begin();i!=mapp.end();i=mapp.begin()){
+            long long count=1;
+            long long ft=i->first;
+            while(mapp.count(ft*ft)==1){
+                count++;
+                mapp.erase(ft);
+                ft=ft*ft;
             }
+            mapp.erase(ft);
             maxCount=max(count,maxCount);
         }
         if(maxCount==1 || maxCount==0) return -1;
