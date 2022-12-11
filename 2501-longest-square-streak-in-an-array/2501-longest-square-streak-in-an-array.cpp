@@ -9,6 +9,7 @@ public:
         for(auto i=mapp.begin();i!=mapp.end();i=mapp.begin()){
             long long count=1;
             long long ft=*i;
+            if(ft>320) break;
             while(mapp.count(ft*ft)==1){
                 count++;
                 mapp.erase(ft);
