@@ -1,14 +1,14 @@
 class Solution {
 public:
     int longestSquareStreak(vector<int>& nums) {
-        map<long,long> mapp;
+        set<long long> mapp;
         for(auto num : nums) {
-            mapp[num]++;
+            mapp.insert(num);
         }
         long long maxCount=0;
         for(auto i=mapp.begin();i!=mapp.end();i=mapp.begin()){
             long long count=1;
-            long long ft=i->first;
+            long long ft=*i;
             while(mapp.count(ft*ft)==1){
                 count++;
                 mapp.erase(ft);
