@@ -15,7 +15,9 @@ public:
         if(prev==head->val || ((head->next) && head->val==head->next->val)){
             return deleteDuplicates(head->next,head->val);
         }
+        else{
             head->next=deleteDuplicates(head->next,head->val);
             return head;
+        }
     }
 };
